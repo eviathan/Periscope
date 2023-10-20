@@ -226,6 +226,12 @@
 		D0DA81F0EE2E02E69F9F2AD8 /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		D33AC4B02AE30809000D2985 /* WaveformComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = WaveformComponent.cpp; path = ../../Source/WaveformComponent.cpp; sourceTree = "<group>"; };
 		D33AC4B12AE30809000D2985 /* WaveformComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = WaveformComponent.hpp; path = ../../Source/WaveformComponent.hpp; sourceTree = "<group>"; };
+		D33AC4B22AE3266F000D2985 /* StateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = StateManager.cpp; path = ../../Source/StateManager.cpp; sourceTree = "<group>"; };
+		D33AC4B32AE3266F000D2985 /* StateManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = StateManager.hpp; path = ../../Source/StateManager.hpp; sourceTree = "<group>"; };
+		D33AC4B62AE32A10000D2985 /* Enums */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Enums; path = ../../Source/Enums; sourceTree = "<group>"; };
+		D33AC4B82AE32B85000D2985 /* AppState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppState.h; path = ../../Source/Models/AppState.h; sourceTree = "<group>"; };
+		D33AC4B92AE32C2C000D2985 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../Source/Models; sourceTree = "<group>"; };
+		D3B7EA7C2AE32DD700E250D1 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Components; path = ../../Source/Components; sourceTree = "<group>"; };
 		D7F2DCBC459A04F1B64CD970 /* JucePluginDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JucePluginDefines.h; path = ../../JuceLibraryCode/JucePluginDefines.h; sourceTree = SOURCE_ROOT; };
 		DADF8CF19340C628A0C013A3 /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
 		DEFA15432C425E027646D9F1 /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = /Volumes/Work/Dev/Libs/JUCE/JUCE/modules/juce_audio_basics; sourceTree = "<absolute>"; };
@@ -333,12 +339,18 @@
 		0316C59CDEBD361F7E368902 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D3B7EA7C2AE32DD700E250D1 /* Components */,
+				D33AC4B92AE32C2C000D2985 /* Models */,
+				D33AC4B62AE32A10000D2985 /* Enums */,
 				D0DA81F0EE2E02E69F9F2AD8 /* PluginProcessor.cpp */,
 				923E412847D19FAA3174B494 /* PluginProcessor.h */,
 				B246E80C9257F67E61923946 /* PluginEditor.cpp */,
 				977028667111CB7A056791F5 /* PluginEditor.h */,
 				D33AC4B02AE30809000D2985 /* WaveformComponent.cpp */,
 				D33AC4B12AE30809000D2985 /* WaveformComponent.hpp */,
+				D33AC4B22AE3266F000D2985 /* StateManager.cpp */,
+				D33AC4B32AE3266F000D2985 /* StateManager.hpp */,
+				D33AC4B82AE32B85000D2985 /* AppState.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

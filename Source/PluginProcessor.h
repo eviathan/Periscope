@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "StateManager.hpp"
 
 //==============================================================================
 /**
@@ -57,11 +58,15 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     //==============================================================================
     
-    const juce::Array<float>& getWaveformBuffer() const;
-
+    
+    StateManager stateManager;
+    
 private:
-    juce::Array<float> waveformBuffer;
+    
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PeriscopeAudioProcessor)
+    //==============================================================================
+    
+    
 };

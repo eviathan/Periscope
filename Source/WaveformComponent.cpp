@@ -10,9 +10,7 @@
 
 class MainComponent : public juce::OpenGLAppComponent
 {
-    
-    GLuint 
-    
+        
 public:
     MainComponent()
     {

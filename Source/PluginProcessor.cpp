@@ -191,8 +191,3 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 }
 
 //==============================================================================
-
-const juce::Array<float>& PeriscopeAudioProcessor::getWaveformBuffer() const
-{
-   return waveformBuffer;
-}
