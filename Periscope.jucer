@@ -3,6 +3,28 @@
 <JUCERPROJECT id="fJoo2M" name="Periscope" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" displaySplashScreen="0">
   <MAINGROUP id="E7oKeW" name="Periscope">
+    <GROUP id="{337A7910-3DFD-8443-40CE-55231138487E}" name="Resources">
+      <FILE id="rd1u2w" name="Logo.svg" compile="0" resource="1" file="Resources/Logo.svg"/>
+    </GROUP>
+    <GROUP id="{62177D6D-8D6A-70CC-BD68-7C20E6680796}" name="Components">
+      <FILE id="V2sjj8" name="HeaderComponent.hpp" compile="0" resource="0"
+            file="Source/Components/HeaderComponent.hpp"/>
+      <FILE id="apCW0b" name="LayoutComponent.hpp" compile="0" resource="0"
+            file="Source/Components/LayoutComponent.hpp"/>
+      <FILE id="Wc3c1M" name="MultiViewComponent.hpp" compile="0" resource="0"
+            file="Source/Components/MultiViewComponent.hpp"/>
+      <FILE id="maGx1N" name="WaveformComponent.cpp" compile="1" resource="0"
+            file="Source/Components/WaveformComponent.cpp"/>
+      <FILE id="gMRP2k" name="WaveformComponent.hpp" compile="0" resource="0"
+            file="Source/Components/WaveformComponent.hpp"/>
+    </GROUP>
+    <GROUP id="{9CE11454-DD6E-08A6-F304-A73E5C7A1597}" name="Enums">
+      <FILE id="gZCO21" name="AppStateType.h" compile="0" resource="0" file="Source/Enums/AppStateType.h"/>
+    </GROUP>
+    <GROUP id="{9B178398-6A40-A84C-8733-7AF9A9E3A997}" name="Models">
+      <FILE id="iskhPi" name="AppState.h" compile="0" resource="0" file="Source/Models/AppState.h"/>
+      <FILE id="vlf9bF" name="Channel.h" compile="0" resource="0" file="Source/Models/Channel.h"/>
+    </GROUP>
     <GROUP id="{373BA391-67A9-C5F6-287F-1785E624EBFA}" name="Source">
       <FILE id="LqZF4e" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
@@ -12,6 +34,10 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="Jsjv5S" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
+    <FILE id="nMOFlu" name="StateManager.cpp" compile="1" resource="0"
+          file="Source/StateManager.cpp"/>
+    <FILE id="a0K3Pa" name="StateManager.hpp" compile="0" resource="0"
+          file="Source/StateManager.hpp"/>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

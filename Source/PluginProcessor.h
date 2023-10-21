@@ -59,7 +59,7 @@ public:
     //==============================================================================
     
     
-    StateManager stateManager;
+    StateManager* stateManager;
     
 private:
     

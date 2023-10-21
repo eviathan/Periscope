@@ -13,11 +13,10 @@
 PeriscopeAudioProcessorEditor::PeriscopeAudioProcessorEditor (PeriscopeAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    layout = new LayoutComponent();
+    layout = new LayoutComponent(p.stateManager);
     addAndMakeVisible(layout);
-    
-    setSize (1280, 720);
-    
+        
+    setSize (1200, 700);
 }
 
 PeriscopeAudioProcessorEditor::~PeriscopeAudioProcessorEditor()
