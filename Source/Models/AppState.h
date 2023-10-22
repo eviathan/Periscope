@@ -12,13 +12,13 @@
 #include "Channel.h"
 
 struct AppState {
-    AppStateType AppState;
+    AppStateType stateType = AppStateType::Single;
     
     int bufferSize = 512;
-    float windowSize;
+    float windowSize = 100.0f;
     juce::Array<Channel> channels;
     
-    float zoomLevel;
-    bool quantized;
+    float zoomLevel = 1.0f;
+    bool quantized = false;
 };
 #endif /* AppState_h */

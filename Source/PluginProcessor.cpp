@@ -22,6 +22,7 @@ PeriscopeAudioProcessor::PeriscopeAudioProcessor()
                        )
 #endif
 {
+    stateManager = new StateManager();
 }
 
 PeriscopeAudioProcessor::~PeriscopeAudioProcessor()

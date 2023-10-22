@@ -58,7 +58,6 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     //==============================================================================
     
-    
     StateManager* stateManager;
     
 private:

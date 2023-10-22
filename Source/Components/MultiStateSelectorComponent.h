@@ -34,7 +34,7 @@ public:
         juce::Font labelFont("Futura", 37.0f, juce::Font::plain);
         labelFont.setTypefaceStyle("Bold");
         
-        label = new juce::Label("stateSelectorLabel", "SINGLE");
+        label = new juce::Label("stateSelectorLabel", stateManager->getAppStateLabel());
         label->setColour(juce::Label::textColourId, juce::Colours::white);
         label->setFont(labelFont);
         label->setJustificationType(juce::Justification::centred);
@@ -49,24 +49,30 @@ public:
    
     void resized () override
     {
-        leftButton->setBounds(0, 0, 26, getHeight());
-        label->setBounds(26, 0, 148, getHeight());
-        rightButton->setBounds(getWidth() - 26, 0, 26, getHeight());
+        leftButton->setBounds(0, 0, BUTTON_WIDTH, getHeight());
+        label->setBounds(BUTTON_WIDTH, 0, getWidth() - (BUTTON_WIDTH * 2), getHeight());
+        rightButton->setBounds(getWidth() - BUTTON_WIDTH, 0, BUTTON_WIDTH, getHeight());
     }
     
 private:
+    const int BUTTON_WIDTH = 26;
+    
     ArrowButton* leftButton;
     juce::Label* label;
     ArrowButton* rightButton;
     
     void onLeftClick()
     {
-        
+        stateManager->changeState(-1);
+        std::string labelText = stateManager->getAppStateLabel();
+        label->setText(labelText, juce::NotificationType::dontSendNotification);
     }
     
     void onRightClick()
     {
-        
+        stateManager->changeState(1);
+        std::string labelText = stateManager->getAppStateLabel();
+        label->setText(labelText, juce::NotificationType::dontSendNotification);
     }
 };
 

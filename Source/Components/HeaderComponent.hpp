@@ -33,7 +33,7 @@ public:
         }
         
         appStateSelector = new MultiStateSelectorComponent(sManager);
-        auto appStateSelectorWidth = 200;
+        auto appStateSelectorWidth = 175;
         auto appStateSelectorHeight = 50;
         
         appStateSelector->setBounds(950, 38, appStateSelectorWidth, appStateSelectorHeight);

@@ -11,15 +11,17 @@
 #include <stdio.h>
 #include <JuceHeader.h>
 #include "Models/AppState.h"
-
+#include "Enums/AppStateType.h"
 
 class StateManager
 {
 public:
-    AppState state;
+    StateManager();
     
-private:
-
+    std::unique_ptr<AppState> state;
+    
+    void changeState(int value);
+    std::string getAppStateLabel();
 };
 
 #endif /* StateManager_hpp */
