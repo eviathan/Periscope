@@ -16,11 +16,10 @@
 class StateManager
 {
 public:
-    
-    
-private:
     AppState state;
     
+private:
+
 };
 
 #endif /* StateManager_hpp */

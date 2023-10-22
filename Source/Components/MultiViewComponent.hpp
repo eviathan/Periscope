@@ -7,7 +7,7 @@
 
 #include <JuceHeader.h>
 #include "../StateManager.hpp"
-
+#include "GridComponent.h"
 
 // TODO:
 // 1. We need to create the background grid view
@@ -27,17 +27,16 @@ public:
     MultiViewComponent(StateManager* sManager)
     {
         stateManager = sManager;
+        grid = new GridComponent(stateManager);
+        
+        addAndMakeVisible(grid);
     }
     
-    void paint (juce::Graphics& g)
+    void resized () override
     {
-        // (Our component is opaque, so we must completely fill the background with a solid colour)
-        g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    
-        g.setColour (juce::Colours::white);
-        g.setFont (35.0f);
-        g.drawFittedText ("Working!", getLocalBounds(), juce::Justification::centred, 1);
+        grid->setBounds(0, 0, getWidth(), getHeight());
     }
     
-    // void resized () override {}
+private:
+    GridComponent* grid;
 };

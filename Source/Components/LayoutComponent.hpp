@@ -16,7 +16,7 @@ class LayoutComponent : public juce::Component
 public:
     LayoutComponent(StateManager* stateManager)
     {
-        header = new HeaderComponent();
+        header = new HeaderComponent(stateManager);
         body = new MultiViewComponent(stateManager);
         
         addAndMakeVisible(header);

@@ -7,12 +7,13 @@
 
 #include <JuceHeader.h>
 #include "BinaryData.h"
+#include "MultiStateSelectorComponent.h"
 
 class HeaderComponent : public juce::Component
 {
         
 public:
-    HeaderComponent()
+    HeaderComponent(StateManager* sManager)
     {
         auto svgData = BinaryData::Logo_svg;
 
@@ -21,40 +22,38 @@ public:
 
         if (svgElement != nullptr)
         {
-            svgDrawable = std::move(juce::Drawable::createFromSVG(*svgElement));
+            svgDrawable = juce::Drawable::createFromSVG(*svgElement);
 
             if (svgDrawable)
             {
-                // Set the SVG drawable's bounds, scale it, position it, etc.
-                svgDrawable->setBounds(0, 0, 100, 100); // Position and size it as you want
+                svgDrawable->setBounds(0, 0, 100, 100);
                 juce::AffineTransform transform = juce::AffineTransform::translation(40, 15);
                 svgDrawable->setTransform(transform);
             }
         }
+        
+        appStateSelector = new MultiStateSelectorComponent(sManager);
+        auto appStateSelectorWidth = 200;
+        auto appStateSelectorHeight = 50;
+        
+        appStateSelector->setBounds(950, 38, appStateSelectorWidth, appStateSelectorHeight);
+        addAndMakeVisible(appStateSelector);
     }
     
     void paint (juce::Graphics& g)
     {
-        // (Our component is opaque, so we must completely fill the background with a solid colour)
         g.fillAll (juce::Colours::black);
-    
         g.setColour (juce::Colours::white);
-//        g.setFont (35.0f);
-//        g.drawFittedText ("Header!", getLocalBounds(), juce::Justification::centred, 1);
         
-//        g.setColour(juce::Colours::red);
-
-        // Draw the bottom border
-        float borderWidth = 2.0f;  // Set the desired border width
+        float borderWidth = 2.0f;
         juce::Rectangle<float> bottomBorder(0, getHeight() - borderWidth, getWidth(), borderWidth);
         g.fillRect(bottomBorder);
         
         if (svgDrawable != nullptr)
-           svgDrawable->draw(g, 1.0f);  // The second argument is the opacity
+           svgDrawable->draw(g, 1.0f);
     }
-    
-    // void resized () override {}
     
 private:
     std::unique_ptr<juce::Drawable> svgDrawable;
+    MultiStateSelectorComponent* appStateSelector;
 };

@@ -13,6 +13,12 @@
 
 struct AppState {
     AppStateType AppState;
-    juce::Array<Channel> channels; // NOTE: We are getting this working monophonically for now but
+    
+    int bufferSize = 512;
+    float windowSize;
+    juce::Array<Channel> channels;
+    
+    float zoomLevel;
+    bool quantized;
 };
 #endif /* AppState_h */
