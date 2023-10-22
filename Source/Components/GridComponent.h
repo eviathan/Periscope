@@ -42,6 +42,12 @@ public:
             int xPosition = round((width / static_cast<float>(numberOfDivisions)) * i);
             g.drawRect(xPosition, 0, 2, height);
         }
+        
+        g.setColour (juce::Colours::white);
+        
+        float borderWidth = 2.0f;
+        juce::Rectangle<float> bottomBorder(0, getHeight() - borderWidth, getWidth(), borderWidth);
+        g.fillRect(bottomBorder);
     }
     
     // void resized () override {}

@@ -239,6 +239,7 @@
 		D35803DC2AE54E6400FF8090 /* MultiStateSelectorComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MultiStateSelectorComponent.h; path = ../../Source/Components/MultiStateSelectorComponent.h; sourceTree = "<group>"; };
 		D35803DD2AE572B000FF8090 /* ArrowButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ArrowButton.h; path = ../../Source/Components/ArrowButton.h; sourceTree = "<group>"; };
 		D35803DE2AE5745A00FF8090 /* Direction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Direction.h; path = ../../Source/Enums/Direction.h; sourceTree = "<group>"; };
+		D35803DF2AE5B5AA00FF8090 /* FooterComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FooterComponent.h; path = ../../Source/Components/FooterComponent.h; sourceTree = "<group>"; };
 		D50CDDD9C325A2226AC85688 /* LayoutComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LayoutComponent.hpp; path = ../../Source/Components/LayoutComponent.hpp; sourceTree = SOURCE_ROOT; };
 		D6534825D888DA637D730AC5 /* StateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = StateManager.cpp; path = ../../Source/StateManager.cpp; sourceTree = SOURCE_ROOT; };
 		D7F2DCBC459A04F1B64CD970 /* JucePluginDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JucePluginDefines.h; path = ../../JuceLibraryCode/JucePluginDefines.h; sourceTree = SOURCE_ROOT; };
@@ -474,6 +475,7 @@
 				D35803DB2AE5360A00FF8090 /* GridComponent.h */,
 				D35803DC2AE54E6400FF8090 /* MultiStateSelectorComponent.h */,
 				D35803DD2AE572B000FF8090 /* ArrowButton.h */,
+				D35803DF2AE5B5AA00FF8090 /* FooterComponent.h */,
 			);
 			name = Components;
 			sourceTree = "<group>";

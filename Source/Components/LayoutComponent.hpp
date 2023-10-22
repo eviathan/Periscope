@@ -8,41 +8,35 @@
 #include <JuceHeader.h>
 #include "HeaderComponent.hpp"
 #include "MultiViewComponent.hpp"
+#include "FooterComponent.h"
 #include "../StateManager.hpp"
 
 class LayoutComponent : public juce::Component
 {
-        
 public:
     LayoutComponent(StateManager* stateManager)
     {
         header = new HeaderComponent(stateManager);
         body = new MultiViewComponent(stateManager);
+        footer = new FooterComponent(stateManager);
         
         addAndMakeVisible(header);
         addAndMakeVisible(body);
-        
-//        setSize (1280, 720);
+        addAndMakeVisible(footer);
     }
-    
-//    void paint (juce::Graphics& g) override
-//    {
-//        // (Our component is opaque, so we must completely fill the background with a solid colour)
-//        g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-//    
-//        g.setColour (juce::Colours::white);
-//        g.setFont (35.0f);
-//        g.drawFittedText ("Working!", getLocalBounds(), juce::Justification::centred, 1);
-//    }
     
     void resized () override
     {
-        header->setBounds(0, 0, getWidth(), headerHeight);
-        body->setBounds(0, headerHeight, getWidth(), getHeight() - headerHeight);
+        header->setBounds(0, 0, getWidth(), HEADER_HEIGHT);
+        body->setBounds(0, HEADER_HEIGHT, getWidth(), getHeight() - HEADER_HEIGHT - FOOTER_HEIGHT);
+        footer->setBounds(0, getHeight() - FOOTER_HEIGHT, getWidth(), FOOTER_HEIGHT);
     }
     
 private:
-    const int headerHeight = 117;
+    const int HEADER_HEIGHT = 117;
+    const int FOOTER_HEIGHT = 66;
+    
     HeaderComponent* header;
     MultiViewComponent* body;
+    FooterComponent* footer;
 };
