@@ -26,15 +26,16 @@ public:
     
     void paint (juce::Graphics& g) override
     {
-        g.fillAll (juce::Colours::red);
+        g.fillAll (juce::Colour::fromRGB(35, 35, 35));
     }
 
     void resized () override
     {
         for (int i = 0; i < stateManager->state->channelCount; ++i)
         {
-            int itemWidth = (getWidth() / stateManager->state->channelCount);// * (i + 1);
-            items[i]->setBounds(150 * i, 0, 150, getHeight());
+            int itemWidth = (getWidth() / stateManager->state->channelCount) * (i + 1);
+            items[i]->setBounds(0, 0, itemWidth, getHeight());
+            items[i]->toBack();
         }
     }
 
