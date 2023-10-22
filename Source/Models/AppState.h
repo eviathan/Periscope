@@ -16,9 +16,19 @@ struct AppState {
     
     int bufferSize = 512;
     float windowSize = 100.0f;
-    juce::Array<Channel> channels;
-    
     float zoomLevel = 1.0f;
     bool quantized = false;
+    
+     Channel channels[8] = {
+         Channel(true, true, juce::Colour(178, 76, 79)),
+         Channel(false, false, juce::Colour(187, 128, 33)),
+         Channel(false, false, juce::Colour(210, 197, 6)),
+         Channel(false, false, juce::Colour(149, 231, 115)),
+         Channel(false, false, juce::Colour(115, 213, 167)),
+         Channel(false, false, juce::Colour(69, 156, 178)),
+         Channel(false, false, juce::Colour(98, 69, 178)),
+         Channel(false, false, juce::Colour(178, 69, 172))
+    };
+    int channelCount = sizeof(channels) / sizeof(channels[0]);
 };
 #endif /* AppState_h */

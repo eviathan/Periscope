@@ -12,7 +12,13 @@
 struct Channel {
     bool isEnabled;
     bool isMonitored;
-    juce::Array<float> buffer;
+    juce::Array<float>* buffer = new juce::Array<float>();
+    juce::Colour colour;
+    
+    Channel(bool isEnabled, bool isMonitored, juce::Colour colour) :
+        isEnabled(isEnabled),
+        isMonitored(isMonitored),
+        colour(colour) { }
 };
 
 #endif /* Channel_h */

@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "../StateManager.hpp"
+#include "ChannelTabComponent.h"
 
 class FooterComponent : public juce::Component
 {
@@ -20,23 +21,21 @@ public:
     FooterComponent(StateManager* sManager)
     {
         stateManager = sManager;
+        channelTabs = new ChannelTabComponent(stateManager);
+        
+        addAndMakeVisible(channelTabs);
     }
     
-    void paint (juce::Graphics& g) override
+    void resized () override
     {
-        // (Our component is opaque, so we must completely fill the background with a solid colour)
-        g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-        g.setColour (juce::Colours::white);
-        g.setFont (35.0f);
-        g.drawFittedText ("Working!", getLocalBounds(), juce::Justification::centred, 1);
+        channelTabs->setBounds(0, 0, getWidth(), CHANNEL_TABS_HEIGHT);
     }
-    
-//    void resized () override
-//    {
-//    }
-//
+
 private:
+    const int CHANNEL_TABS_HEIGHT = 44;
+    const int SCROLL_BAR_HEIGHT = 22;
+    
+    ChannelTabComponent* channelTabs;
 };
 
 
