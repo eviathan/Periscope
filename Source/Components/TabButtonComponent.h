@@ -40,8 +40,8 @@ private:
     
     void drawEnabled(juce::Graphics& g, float opacity)
     {
-        g.setColour (channel->colour.withAlpha(opacity));
-        drawRoundedBottomRightRect(g);
+        g.setColour (channel->colour.withSaturation(channel->colour.getSaturation() * opacity));
+        drawRoundedBottomRightRect(g, false);
 
         g.setColour (juce::Colours::white);
         g.setFont (25.0f);
@@ -56,7 +56,7 @@ private:
     void drawDisabled(juce::Graphics& g)
     {
         g.setColour (juce::Colour::fromRGB(35, 35, 35));
-        drawRoundedBottomRightRect(g);
+        drawRoundedBottomRightRect(g, true);
         
         g.setColour (juce::Colour::fromRGBA(255, 255,255, 80));
         g.setFont (21.0f);
@@ -64,7 +64,7 @@ private:
 //        g.drawFittedText ("OFF", getLocalBounds(), juce::Justification::right, 1);
     }
     
-    void drawRoundedBottomRightRect(juce::Graphics& g)
+    void drawRoundedBottomRightRect(juce::Graphics& g, bool withStroke)
     {
         float radius = 16.0f;
         juce::Path path;
@@ -73,11 +73,26 @@ private:
         path.startNewSubPath(rect.getX(), rect.getY());
         path.lineTo(rect.getRight(), rect.getY());
         path.lineTo(rect.getRight(), rect.getBottom() - radius);
-        path.quadraticTo(rect.getRight(), rect.getBottom(), rect.getRight() - radius, rect.getBottom());
-        path.lineTo(rect.getX(), rect.getBottom());
-        path.closeSubPath();
+        
+        // Corrected control point for the curve
+        float controlX = rect.getRight();
+        float controlY = rect.getBottom() - (radius * (sqrt(2)/2));
 
+        path.quadraticTo(controlX, controlY, rect.getRight() - radius, rect.getBottom());
+        path.lineTo(rect.getX(), rect.getBottom());
+        
+//        path.quadraticTo(rect.getRight(), rect.getBottom(), rect.getRight() - radius, rect.getBottom());
+//        path.lineTo(rect.getX(), rect.getBottom());
+        
+        path.closeSubPath();
         g.fillPath(path);
+        
+        if(withStroke)
+        {
+            g.setColour(juce::Colour::fromRGBA(0, 0, 0, 80));
+            float lineWidth = 3.0f;
+            g.strokePath(path, juce::PathStrokeType(lineWidth));
+        }
     }
     
     float getOpacity(bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
@@ -86,11 +101,11 @@ private:
         {
             if(shouldDrawButtonAsDown)
             {
-                return 0.8f;
+                return 0.0f;
             }
             else
             {
-                return 0.6f;
+                return 0.8f;
             }
         }
         else
