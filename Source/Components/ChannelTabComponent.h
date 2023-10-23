@@ -46,7 +46,8 @@ private:
     {
         for (int i = 0; i < stateManager->state->channelCount; ++i)
         {
-            items[i] = new TabButtonComponent(&stateManager->state->channels[i]);
+            bool isLast = stateManager->state->channelCount == i + 1;
+            items[i] = new TabButtonComponent(&stateManager->state->channels[i], i, isLast);
             addAndMakeVisible(items[i]);
         }
     }

@@ -11,8 +11,10 @@
 class TabButtonComponent : public juce::ShapeButton
 {
 public:
-    TabButtonComponent(Channel* chan) :
-        ShapeButton("TabButton", juce::Colours::pink, juce::Colours::pink, juce::Colours::pink)
+    TabButtonComponent(Channel* chan, int channelNumber, bool isLastChannel) :
+        ShapeButton("TabButton", juce::Colours::pink, juce::Colours::pink, juce::Colours::pink),
+        channelNumber(channelNumber),
+        isLastChannel(isLastChannel)
     {
         channel = chan;
         onClick =  [this] { onClickedTab(); };
@@ -32,6 +34,8 @@ public:
 
 private:
     Channel* channel;
+    int channelNumber;
+    bool isLastChannel;
     
     void onClickedTab()
     {
@@ -72,22 +76,30 @@ private:
         
         path.startNewSubPath(rect.getX(), rect.getY());
         path.lineTo(rect.getRight(), rect.getY());
-        path.lineTo(rect.getRight(), rect.getBottom() - radius);
         
-        // Corrected control point for the curve
-        float controlX = rect.getRight();
-        float controlY = rect.getBottom() - (radius * (sqrt(2)/2));
-
-        path.quadraticTo(controlX, controlY, rect.getRight() - radius, rect.getBottom());
+        
+        if(isLastChannel)
+        {
+            path.lineTo(rect.getRight(), rect.getBottom());
+        }
+        else
+        {
+            path.lineTo(rect.getRight(), rect.getBottom() - radius);
+            
+            float controlX = rect.getRight();
+            float controlY = rect.getBottom() - (0.6f * radius);
+            path.quadraticTo(controlX, controlY, rect.getRight() - radius, rect.getBottom());
+            
+//            original
+//            path.quadraticTo(rect.getRight(), rect.getBottom(), rect.getRight() - radius, rect.getBottom());
+        }
+        
         path.lineTo(rect.getX(), rect.getBottom());
-        
-//        path.quadraticTo(rect.getRight(), rect.getBottom(), rect.getRight() - radius, rect.getBottom());
-//        path.lineTo(rect.getX(), rect.getBottom());
         
         path.closeSubPath();
         g.fillPath(path);
         
-        if(withStroke)
+        if(withStroke && !isLastChannel)
         {
             g.setColour(juce::Colour::fromRGBA(0, 0, 0, 80));
             float lineWidth = 3.0f;
