@@ -8,19 +8,21 @@
 #ifndef TabButtonComponent_h
 #define TabButtonComponent_h
 
-class TabButtonComponent : public juce::Component
+class TabButtonComponent : public juce::ShapeButton
 {
 public:
-    TabButtonComponent(Channel* chan)
+    TabButtonComponent(Channel* chan) :
+        ShapeButton("TabButton", juce::Colours::pink, juce::Colours::pink, juce::Colours::pink)
     {
         channel = chan;
+        onClick =  [this] { onClickedTab(); };
     }
 
-    void paint (juce::Graphics& g) override
+    void paintButton(juce::Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override
     {
         if(channel->isEnabled)
         {
-            drawEnabled(g);
+            drawEnabled(g, getOpacity(shouldDrawButtonAsHighlighted, shouldDrawButtonAsDown));
         }
         else
         {
@@ -31,10 +33,14 @@ public:
 private:
     Channel* channel;
     
-    void drawEnabled(juce::Graphics& g)
+    void onClickedTab()
     {
-//        g.fillAll (channel->colour); // NOTE THIS NEEDS TO BE UNSET BECAUSE WE NEED TO DRAW THESE WITH A BORDER RADIUS
-        g.setColour (channel->colour);
+        channel->isEnabled = !channel->isEnabled;
+    }
+    
+    void drawEnabled(juce::Graphics& g, float opacity)
+    {
+        g.setColour (channel->colour.withAlpha(opacity));
         drawRoundedBottomRightRect(g);
 
         g.setColour (juce::Colours::white);
@@ -44,9 +50,10 @@ private:
     
     void drawDisabled(juce::Graphics& g)
     {
-        g.fillAll (juce::Colour::fromRGB(35, 35, 35));
-        g.setColour (juce::Colour::fromRGBA(255, 255,255, 255));
-
+        g.setColour (juce::Colour::fromRGB(35, 35, 35));
+        drawRoundedBottomRightRect(g);
+        
+        g.setColour (juce::Colour::fromRGBA(255, 255,255, 80));
         g.setFont (21.0f);
         g.drawFittedText ("OFF", getLocalBounds(), juce::Justification::right, 1);
     }
@@ -66,7 +73,25 @@ private:
 
         g.fillPath(path);
     }
-
+    
+    float getOpacity(bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
+    {
+        if(shouldDrawButtonAsHighlighted)
+        {
+            if(shouldDrawButtonAsDown)
+            {
+                return 0.8f;
+            }
+            else
+            {
+                return 0.6f;
+            }
+        }
+        else
+        {
+            return 1.0f;
+        }
+    }
 };
 
 #endif /* TabButtonComponent_h */
