@@ -85,10 +85,11 @@ private:
         else
         {
             path.lineTo(rect.getRight(), rect.getBottom() - radius);
+            path.lineTo(rect.getRight() - radius, rect.getBottom());
             
-            float controlX = rect.getRight();
-            float controlY = rect.getBottom() - (0.6f * radius);
-            path.quadraticTo(controlX, controlY, rect.getRight() - radius, rect.getBottom());
+//            float controlX = rect.getRight();
+//            float controlY = rect.getBottom() - (0.6f * radius);
+//            path.quadraticTo(controlX, controlY, rect.getRight() - radius, rect.getBottom());
             
 //            original
 //            path.quadraticTo(rect.getRight(), rect.getBottom(), rect.getRight() - radius, rect.getBottom());
