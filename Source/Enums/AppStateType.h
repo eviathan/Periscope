@@ -12,7 +12,9 @@ enum AppStateType {
     Single,
     Sum,
     Layer,
-    Stack
+    Stack,
+    Scope,
+    Phase
 };
 
 #endif /* AppStateType_h */

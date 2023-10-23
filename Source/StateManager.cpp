@@ -12,7 +12,9 @@ constexpr AppStateType allStates[] =
     AppStateType::Single,
     AppStateType::Sum,
     AppStateType::Layer,
-    AppStateType::Stack
+    AppStateType::Stack,
+    AppStateType::Scope,
+    AppStateType::Phase
 };
 
 StateManager::StateManager() :
@@ -22,13 +24,12 @@ void StateManager::changeState(int value)
 {
     int newState = static_cast<int>(state->stateType) + value;
     size_t length = sizeof(allStates) / sizeof(allStates[0]);
-    
-    newState %= length;
-    
+
     if (newState < 0) {
-        newState += length;
+        newState += length;  // Adjust it before taking modulus
     }
-     
+
+    newState %= length;
     state->stateType = static_cast<AppStateType>(newState);
 }
 
@@ -44,6 +45,10 @@ std::string StateManager::getAppStateLabel()
             return "Stack";
         case AppStateType::Sum:
             return "Sum";
+        case AppStateType::Scope:
+            return "Scope";
+        case AppStateType::Phase:
+            return "Phase";
         default:
             return "N/A";
     }
