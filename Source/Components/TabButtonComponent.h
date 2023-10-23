@@ -45,7 +45,12 @@ private:
 
         g.setColour (juce::Colours::white);
         g.setFont (25.0f);
-        g.drawFittedText ("-9.21!", getLocalBounds(), juce::Justification::right, 1);
+//        g.drawFittedText("-9.21", getLocalBounds(), juce::Justification::right, 1);
+        g.drawText("-9.22", getWidth() - 136, 0, 66, 44, juce::Justification::right);
+        
+        g.setFont (14.0f);
+        g.drawText("db", getWidth() - 80, 4, 44, 44, juce::Justification::centred);
+        //g.drawFittedText("dB", getLocalBounds(), juce::Justification::right, 1);
     }
     
     void drawDisabled(juce::Graphics& g)
@@ -55,7 +60,8 @@ private:
         
         g.setColour (juce::Colour::fromRGBA(255, 255,255, 80));
         g.setFont (21.0f);
-        g.drawFittedText ("OFF", getLocalBounds(), juce::Justification::right, 1);
+        g.drawText("OFF", getWidth() - 100, -16, 44, 80, juce::Justification::centred);
+//        g.drawFittedText ("OFF", getLocalBounds(), juce::Justification::right, 1);
     }
     
     void drawRoundedBottomRightRect(juce::Graphics& g)
