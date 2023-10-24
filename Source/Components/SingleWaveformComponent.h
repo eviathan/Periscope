@@ -88,31 +88,67 @@ private:
 //                       LINE_THICKNESS);
 //        }
 //    }
+    
+//    void drawWaveform(juce::Graphics& g, float* buffer, juce::Colour colour)
+//    {
+//        const int w = getWidth();
+//        const int h = getHeight();
+//        const int bufferLength = stateManager->state->bufferSize;
+//
+//        juce::Path waveformPath;
+//
+//        // Starting at the first point
+//        float firstSample = buffer[0];
+//        waveformPath.startNewSubPath(0, h * (1.0f - (firstSample * 0.5f + 0.5f)));
+//
+//        // Trace the upper edge of the waveform
+//        for (int i = 1; i < w && i < bufferLength; ++i)
+//        {
+//            float sample = buffer[i];
+//            waveformPath.lineTo(i, h * (1.0f - (sample * 0.5f + 0.5f)));
+//        }
+//
+//        // Now trace the bottom edge to close the path
+//        for (int i = juce::jmin(w, bufferLength) - 1; i >= 0; --i)
+//        {
+//            float sample = buffer[i];
+//            waveformPath.lineTo(i, h - (h * (1.0f - (sample * 0.5f + 0.5f))));
+//        }
+//
+//        waveformPath.closeSubPath();
+//
+//        // Fill the waveform with a color that's 70% opaque
+//        g.setColour(colour.withAlpha(0.7f));
+//        g.fillPath(waveformPath);
+//
+//        // Draw the waveform outline with a thickness of 2 pixels
+//        g.setColour(colour);
+//        g.strokePath(waveformPath, juce::PathStrokeType(2.0f));
+//    }
+    
     void drawWaveform(juce::Graphics& g, float* buffer, juce::Colour colour)
     {
         const int w = getWidth();
         const int h = getHeight();
         const int bufferLength = stateManager->state->bufferSize;
+        const float zeroDbLine = h * 0.5f;  // The vertical position representing 0 dB
 
         juce::Path waveformPath;
 
         // Starting at the first point
         float firstSample = buffer[0];
-        waveformPath.startNewSubPath(0, h * (1.0f - (firstSample * 0.5f + 0.5f)));
+        waveformPath.startNewSubPath(0, zeroDbLine - (firstSample * 0.5f * h));
 
         // Trace the upper edge of the waveform
         for (int i = 1; i < w && i < bufferLength; ++i)
         {
             float sample = buffer[i];
-            waveformPath.lineTo(i, h * (1.0f - (sample * 0.5f + 0.5f)));
+            waveformPath.lineTo(i, zeroDbLine - (sample * 0.5f * h));
         }
 
-        // Now trace the bottom edge to close the path
-        for (int i = juce::jmin(w, bufferLength) - 1; i >= 0; --i)
-        {
-            float sample = buffer[i];
-            waveformPath.lineTo(i, h - (h * (1.0f - (sample * 0.5f + 0.5f))));
-        }
+        // Now trace back to the starting point at the 0 dB line
+        waveformPath.lineTo(juce::jmin(w, bufferLength) - 1, zeroDbLine);
+        waveformPath.lineTo(0, zeroDbLine);
 
         waveformPath.closeSubPath();
 
@@ -124,6 +160,7 @@ private:
         g.setColour(colour);
         g.strokePath(waveformPath, juce::PathStrokeType(2.0f));
     }
+
 
     void timerCallback() override
     {
