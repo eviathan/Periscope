@@ -23,7 +23,16 @@ public:
         stateManager = sManager;
         grid = new GridComponent(stateManager);
         
-        addAndMakeVisible(grid);
+//        addAndMakeVisible(grid);
+    }
+    
+    void paint (juce::Graphics& g) override
+    {
+        g.fillAll (juce::Colours::black);
+        g.setColour (juce::Colours::white);
+
+        g.setFont (35.0f);
+        g.drawFittedText ("Spectrum", getLocalBounds(), juce::Justification::centred, 1);
     }
     
     void resized () override

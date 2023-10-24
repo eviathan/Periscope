@@ -7,18 +7,28 @@
 
 #ifndef Channel_h
 #define Channel_h
+#include <array>
 #include "../Enums/AppStateType.h"
 
 struct Channel {
     bool isEnabled;
     bool isMonitored;
-    juce::Array<float>* buffer = new juce::Array<float>();
+    float* buffer = nullptr;  // raw pointer to a dynamically allocated array
     juce::Colour colour;
     
     Channel(bool isEnabled, bool isMonitored, juce::Colour colour) :
         isEnabled(isEnabled),
         isMonitored(isMonitored),
         colour(colour) { }
+    
+    ~Channel() {
+        delete[] buffer;
+    }
+    
+    void allocateBuffer(size_t size) {
+        delete[] buffer; // deallocate previous memory
+        buffer = new float[size];
+    }
 };
 
 #endif /* Channel_h */

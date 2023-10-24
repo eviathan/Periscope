@@ -1,24 +1,24 @@
 //
-//  StackWaveformComponent.h
+//  SpectralComponent.h
 //  Periscope
 //
 //  Created by Brian Williams on 24/10/2023.
 //
 
-#ifndef StackWaveformComponent_h
-#define StackWaveformComponent_h
+#ifndef SpectralComponent_h
+#define SpectralComponent_h
 
 #include <JuceHeader.h>
 #include "../StateManager.hpp"
 #include "GridComponent.h"
 
-class StackWaveformComponent : public juce::Component
+class SpectralComponent : public juce::Component
 {
         
 public:
     StateManager* stateManager;
     
-    StackWaveformComponent(StateManager* sManager)
+    SpectralComponent(StateManager* sManager)
     {
         stateManager = sManager;
         grid = new GridComponent(stateManager);
@@ -32,7 +32,7 @@ public:
         g.setColour (juce::Colours::white);
 
         g.setFont (35.0f);
-        g.drawFittedText ("Stack", getLocalBounds(), juce::Justification::centred, 1);
+        g.drawFittedText ("Spectral", getLocalBounds(), juce::Justification::centred, 1);
     }
     
     void resized () override
@@ -44,4 +44,4 @@ private:
     GridComponent* grid;
 };
 
-#endif /* StackWaveformComponent_h */
+#endif /* SpectralComponent_h */

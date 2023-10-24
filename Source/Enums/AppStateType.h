@@ -15,7 +15,8 @@ enum AppStateType {
     Stack,
     Spectrum,
     Oscilloscope,
-    Phase
+    Phase,
+    Spectral
 };
 
 #endif /* AppStateType_h */

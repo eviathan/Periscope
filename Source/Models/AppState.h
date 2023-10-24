@@ -21,8 +21,8 @@ struct AppState {
     
      Channel channels[8] = {
          Channel(true, true, juce::Colour(178, 76, 79)),
-         Channel(false, false, juce::Colour(187, 128, 33)),
-         Channel(false, false, juce::Colour(210, 197, 6)),
+         Channel(true, true, juce::Colour(187, 128, 33)),
+         Channel(false, true, juce::Colour(210, 197, 6)),
          Channel(false, false, juce::Colour(149, 231, 115)),
          Channel(true, true, juce::Colour(115, 213, 167)),
          Channel(true, true, juce::Colour(69, 156, 178)),
