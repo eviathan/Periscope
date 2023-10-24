@@ -19,6 +19,9 @@ struct AppState {
     float zoomLevel = 1.0f;
     bool quantized = false;
     
+    bool isNormalised = false;
+    bool isSynced = false;
+    
      Channel channels[8] = {
          Channel(true, true, juce::Colour(178, 76, 79)),
          Channel(true, true, juce::Colour(187, 128, 33)),
