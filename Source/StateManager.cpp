@@ -13,7 +13,8 @@ constexpr AppStateType allStates[] =
     AppStateType::Sum,
     AppStateType::Layer,
     AppStateType::Stack,
-    AppStateType::Scope,
+    AppStateType::Spectrum,
+    AppStateType::Oscilloscope,
     AppStateType::Phase
 };
 
@@ -45,7 +46,9 @@ std::string StateManager::getAppStateLabel()
             return "Stack";
         case AppStateType::Sum:
             return "Sum";
-        case AppStateType::Scope:
+        case AppStateType::Spectrum:
+            return "Spectre";
+        case AppStateType::Oscilloscope:
             return "Scope";
         case AppStateType::Phase:
             return "Phase";

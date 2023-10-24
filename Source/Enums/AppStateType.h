@@ -13,7 +13,8 @@ enum AppStateType {
     Sum,
     Layer,
     Stack,
-    Scope,
+    Spectrum,
+    Oscilloscope,
     Phase
 };
 
