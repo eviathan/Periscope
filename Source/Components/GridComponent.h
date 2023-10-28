@@ -20,11 +20,9 @@ class GridComponent : public juce::Component
 {
         
 public:
-    StateManager* stateManager;
-    
-    GridComponent(StateManager* sManager)
+    GridComponent(StateManager& sManager) :
+        stateManager(sManager)
     {
-        stateManager = sManager;
     }
     
     void paint (juce::Graphics& g)
@@ -46,6 +44,7 @@ public:
     
     // void resized () override {}
 private:
+    StateManager& stateManager;
     int numberOfDivisions;
     
     void drawGridLine(int index)

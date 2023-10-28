@@ -16,11 +16,9 @@ class FooterComponent : public juce::Component
 {
         
 public:
-    StateManager* stateManager;
-    
-    FooterComponent(StateManager* sManager)
+    FooterComponent(StateManager& stateManager) :
+        stateManager(stateManager)
     {
-        stateManager = sManager;
         channelTabs = new ChannelTabComponent(stateManager);
         
         addAndMakeVisible(channelTabs);
@@ -32,6 +30,7 @@ public:
     }
 
 private:
+    StateManager& stateManager;
     const int CHANNEL_TABS_HEIGHT = 44;
     const int SCROLL_BAR_HEIGHT = 22;
     

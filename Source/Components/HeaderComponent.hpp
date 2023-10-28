@@ -13,7 +13,8 @@ class HeaderComponent : public juce::Component
 {
         
 public:
-    HeaderComponent(StateManager* sManager)
+    HeaderComponent(StateManager& stateManager) :
+        stateManager(stateManager)
     {
         auto svgData = BinaryData::Logo_svg;
 
@@ -32,7 +33,7 @@ public:
             }
         }
         
-        appStateSelector = new MultiStateSelectorComponent(sManager);
+        appStateSelector = new MultiStateSelectorComponent(stateManager);
         auto appStateSelectorWidth = 175;
         auto appStateSelectorHeight = 50;
         
@@ -54,6 +55,7 @@ public:
     }
     
 private:
+    StateManager& stateManager;
     std::unique_ptr<juce::Drawable> svgDrawable;
     MultiStateSelectorComponent* appStateSelector;
 };

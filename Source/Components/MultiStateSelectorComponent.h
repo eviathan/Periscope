@@ -18,12 +18,9 @@ class MultiStateSelectorComponent : public juce::Component
 {
        
 public:
-   StateManager* stateManager;
-   
-    MultiStateSelectorComponent(StateManager* sManager)
+    MultiStateSelectorComponent(StateManager& stateManager) :
+        stateManager(stateManager)
     {
-        stateManager = sManager;
-        
         auto normalColour = juce::Colours::white;
         auto overColour = juce::Colours::grey;
         auto downColour = juce::Colours::darkgrey;
@@ -34,7 +31,7 @@ public:
         juce::Font labelFont("Futura", 37.0f, juce::Font::plain);
         labelFont.setTypefaceStyle("Bold");
         
-        label = new juce::Label("stateSelectorLabel", stateManager->getAppStateLabel());
+        label = new juce::Label("stateSelectorLabel", stateManager.getAppStateLabel());
         label->setColour(juce::Label::textColourId, juce::Colours::white);
         label->setFont(labelFont);
         label->setJustificationType(juce::Justification::centred);
@@ -55,6 +52,7 @@ public:
     }
     
 private:
+    StateManager& stateManager;
     const int BUTTON_WIDTH = 26;
     
     ArrowButton* leftButton;
@@ -63,15 +61,15 @@ private:
     
     void onLeftClick()
     {
-        stateManager->changeState(-1);
-        std::string labelText = stateManager->getAppStateLabel();
+        stateManager.changeState(-1);
+        std::string labelText = stateManager.getAppStateLabel();
         label->setText(labelText, juce::NotificationType::dontSendNotification);
     }
     
     void onRightClick()
     {
-        stateManager->changeState(1);
-        std::string labelText = stateManager->getAppStateLabel();
+        stateManager.changeState(1);
+        std::string labelText = stateManager.getAppStateLabel();
         label->setText(labelText, juce::NotificationType::dontSendNotification);
     }
 };

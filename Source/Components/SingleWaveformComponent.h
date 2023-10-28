@@ -17,11 +17,9 @@ class SingleWaveformComponent : public juce::Component,
 {
         
 public:
-    StateManager* stateManager;
-    
-    SingleWaveformComponent(StateManager* sManager)
+    SingleWaveformComponent(StateManager& sManager) :
+        stateManager(sManager)
     {
-        stateManager = sManager;
         grid = new GridComponent(stateManager);
         
         startTimerHz(60);
@@ -39,9 +37,9 @@ public:
     {
         g.fillAll(juce::Colours::black);  // Fill the background
 
-        for (int i = 0; i < stateManager->state->channelCount; ++i)
+        for (int i = 0; i < stateManager.state->channelCount; ++i)
         {
-            const auto& channel = stateManager->state->channels[i];
+            const auto& channel = stateManager.state->channels[i];
             if (channel.isEnabled && channel.isMonitored)
             {
                 drawWaveform(g, channel.buffer, channel.colour);
@@ -64,6 +62,7 @@ public:
     }
     
 private:
+    StateManager& stateManager;
     GridComponent* grid;
     const float LINE_THICKNESS = 2.0f;
    
@@ -163,7 +162,7 @@ private:
 
     int findZeroCrossing(float* buffer, int bufferLength)
     {
-        if (!stateManager->state->isSynced)
+        if (!stateManager.state->isSynced)
         {
             return 0;  // If not syncing to zero-crossing, return start of buffer
         }
@@ -178,15 +177,15 @@ private:
 
     void drawWaveform(juce::Graphics& g, float* buffer, juce::Colour colour)
     {
-        if(stateManager->state->isNormalised)
+        if(stateManager.state->isNormalised)
         {
             const float NOISE_FLOOR_THRESHOLD = 0.02f;  // For example, 2% of full scale. Adjust as needed.
-            normalizeBuffer(buffer, stateManager->state->bufferSize, NOISE_FLOOR_THRESHOLD);
+            normalizeBuffer(buffer, stateManager.state->bufferSize, NOISE_FLOOR_THRESHOLD);
         }
 
         const int w = getWidth();
         const int h = getHeight();
-        const int bufferLength = stateManager->state->bufferSize;
+        const int bufferLength = stateManager.state->bufferSize;
         const float zeroDbLine = h * 0.5f;
 
         int startIdx = findZeroCrossing(buffer, bufferLength);

@@ -16,11 +16,9 @@ class ChannelTabComponent : public juce::Component
 {
     
 public:
-    StateManager* stateManager;
-    
-    ChannelTabComponent(StateManager* sManager)
+    ChannelTabComponent(StateManager& stateManager) :
+        stateManager(stateManager)
     {
-        stateManager = sManager;
         setupTabs();
     }
     
@@ -31,23 +29,24 @@ public:
 
     void resized () override
     {
-        for (int i = 0; i < stateManager->state->channelCount; ++i)
+        for (int i = 0; i < stateManager.state->channelCount; ++i)
         {
-            int itemWidth = (getWidth() / stateManager->state->channelCount) * (i + 1);
+            int itemWidth = (getWidth() / stateManager.state->channelCount) * (i + 1);
             items[i]->setBounds(0, 0, itemWidth, getHeight());
             items[i]->toBack();
         }
     }
 
 private:
+    StateManager& stateManager;
     TabButtonComponent* items[8];
 
     void setupTabs()
     {
-        for (int i = 0; i < stateManager->state->channelCount; ++i)
+        for (int i = 0; i < stateManager.state->channelCount; ++i)
         {
-            bool isLast = stateManager->state->channelCount == i + 1;
-            items[i] = new TabButtonComponent(&stateManager->state->channels[i], i, isLast);
+            bool isLast = stateManager.state->channelCount == i + 1;
+            items[i] = new TabButtonComponent(stateManager.state->channels[i], i, isLast);
             addAndMakeVisible(items[i]);
         }
     }

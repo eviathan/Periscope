@@ -16,11 +16,9 @@ class SpectrumComponent : public juce::Component
 {
         
 public:
-    StateManager* stateManager;
-    
-    SpectrumComponent(StateManager* sManager)
+    SpectrumComponent(StateManager& sManager) :
+        stateManager(sManager)
     {
-        stateManager = sManager;
         grid = new GridComponent(stateManager);
         
 //        addAndMakeVisible(grid);
@@ -41,6 +39,7 @@ public:
     }
     
 private:
+    StateManager& stateManager;
     GridComponent* grid;
 };
 

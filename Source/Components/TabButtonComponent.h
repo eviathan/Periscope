@@ -11,18 +11,18 @@
 class TabButtonComponent : public juce::ShapeButton
 {
 public:
-    TabButtonComponent(Channel* chan, int channelNumber, bool isLastChannel) :
+    TabButtonComponent(Channel& channel, int channelNumber, bool isLastChannel) :        
         ShapeButton("TabButton", juce::Colours::pink, juce::Colours::pink, juce::Colours::pink),
+        channel(channel),
         channelNumber(channelNumber),
         isLastChannel(isLastChannel)
     {
-        channel = chan;
         onClick =  [this] { onClickedTab(); };
     }
 
     void paintButton(juce::Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override
     {
-        if(channel->isEnabled)
+        if(channel.isEnabled)
         {
             drawEnabled(g, getOpacity(shouldDrawButtonAsHighlighted, shouldDrawButtonAsDown));
         }
@@ -33,18 +33,18 @@ public:
     }
 
 private:
-    Channel* channel;
+    Channel& channel;
     int channelNumber;
     bool isLastChannel;
     
     void onClickedTab()
     {
-        channel->isEnabled = !channel->isEnabled;
+        channel.isEnabled = !channel.isEnabled;
     }
     
     void drawEnabled(juce::Graphics& g, float opacity)
     {
-        g.setColour (channel->colour.withSaturation(channel->colour.getSaturation() * opacity));
+        g.setColour (channel.colour.withSaturation(channel.colour.getSaturation() * opacity));
         drawRoundedBottomRightRect(g, false);
 
         g.setColour (juce::Colours::white);

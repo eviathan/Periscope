@@ -21,24 +21,30 @@ class MultiViewComponent : public juce::Component
 {
         
 public:
-    StateManager* stateManager;
-    
-    MultiViewComponent(StateManager* sManager)
+    MultiViewComponent(StateManager& sManager) :
+        stateManager(sManager)
     {
-        stateManager = sManager;
-        
-        stateManager->registerChangedStateDelegate([this](const int value) {
+        stateManager.registerChangedStateDelegate([this](const int value) {
             this->switchToComponent(value);
         });
         
-        components.add(new SingleWaveformComponent(stateManager));
-        components.add(new SumWaveformComponent(stateManager));
-        components.add(new LayerWaveformComponent(stateManager));
-        components.add(new StackWaveformComponent(stateManager));
-        components.add(new SpectrumComponent(stateManager));
-        components.add(new OscilloscopeComponent(stateManager));
-        components.add(new PhaseScopeComponent(stateManager));
-        components.add(new SpectralComponent(stateManager));
+        singleWaveform = new SingleWaveformComponent(stateManager);
+        sumWaveformComponent = new SumWaveformComponent(stateManager);
+        layerWaveformComponent = new LayerWaveformComponent(stateManager);
+        stackWaveformComponent = new StackWaveformComponent(stateManager);
+        spectrumComponent = new SpectrumComponent(stateManager);
+        oscilloscopeComponent = new OscilloscopeComponent(stateManager);
+        phaseScopeComponent = new PhaseScopeComponent(stateManager);
+        spectralComponent = new SpectralComponent(stateManager);
+        
+        components.add(singleWaveform);
+        components.add(sumWaveformComponent);
+        components.add(layerWaveformComponent);
+        components.add(stackWaveformComponent);
+        components.add(spectrumComponent);
+        components.add(oscilloscopeComponent);
+        components.add(phaseScopeComponent);
+        components.add(spectralComponent);
 
         for (auto* component : components)
         {
@@ -76,6 +82,17 @@ public:
     }
     
 private:
+    StateManager& stateManager;
+    
     const float BOTTOM_BORDER_WIDTH = 2.0f;
     juce::OwnedArray<juce::Component> components;
+    
+    SingleWaveformComponent* singleWaveform;
+    SumWaveformComponent* sumWaveformComponent;
+    LayerWaveformComponent* layerWaveformComponent;
+    StackWaveformComponent* stackWaveformComponent;
+    SpectrumComponent* spectrumComponent;
+    OscilloscopeComponent* oscilloscopeComponent;
+    PhaseScopeComponent* phaseScopeComponent;
+    SpectralComponent* spectralComponent;
 };
