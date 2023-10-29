@@ -39,7 +39,7 @@ StateManager::StateManager() :
 void StateManager::changeState(int value)
 {
     int newState = static_cast<int>(state->stateType) + value;
-    size_t length = sizeof(allStates) / sizeof(allStates[0]);
+    int length = sizeof(allStates) / sizeof(allStates[0]);
 
     if (newState < 0)
     {
@@ -55,7 +55,7 @@ void StateManager::changeState(int value)
     }
     
     // Update the buffer size and reallocate memory for each channel
-    uint64_t newBufferSize = getBufferSizeForState(state->stateType);
+    int newBufferSize = getBufferSizeForState(state->stateType);
     for (int i = 0; i < state->channelCount; ++i) {
         state->channels[i].allocateBuffer(newBufferSize);
     }
